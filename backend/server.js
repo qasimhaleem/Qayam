@@ -1,0 +1,40 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+// Load env vars
+dotenv.config();
+
+const app = express();
+
+// Body parser
+app.use(express.json());
+
+// Enable CORS
+app.use(cors());
+
+// Route files
+const hostelRoutes = require('./routes/hostelRoutes');
+const authRoutes = require('./routes/authRoutes');
+
+// Mount routers
+app.use('/api/hostels', hostelRoutes);
+app.use('/api/auth', authRoutes);
+
+// Connect to database
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (err) {
+        console.log(`Error: ${err.message}`);
+        process.exit(1);
+    }
+};
+
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, console.log(`Server running on port ${PORT}`));
