@@ -1,4 +1,5 @@
 import { Share2, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -17,9 +18,9 @@ export default function Footer() {
             <div className="space-y-4">
               <p className="font-bold text-xs uppercase tracking-widest text-primary-fixed">Platform</p>
               <nav className="flex flex-col gap-3">
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Discover</a>
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Map View</a>
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Hostel Owner</a>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/">Discover</Link>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/map">Map View</Link>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/dashboard">Hostel Owner</Link>
               </nav>
             </div>
 
@@ -38,7 +39,7 @@ export default function Footer() {
                 <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="#">
                   <Share2 className="w-4 h-4" />
                 </a>
-                <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+                <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="mailto:support@qayam.com">
                   <Mail className="w-4 h-4" />
                 </a>
               </div>

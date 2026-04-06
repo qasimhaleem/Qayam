@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -34,6 +35,17 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+// Serve static build in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => res.send('Please set to production'));
+}
 
 const PORT = process.env.PORT || 5000;
 

@@ -45,12 +45,12 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="hidden lg:block text-primary font-medium text-sm px-4 py-2 rounded-lg active:scale-95 transition-transform">
+        <Link to="/signup" className="hidden lg:block text-primary font-medium text-sm px-4 py-2 rounded-lg active:scale-95 transition-transform">
           List Your Hostel
-        </button>
-        <button className="bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm active:scale-95 transition-transform shadow-lg shadow-primary/20">
+        </Link>
+        <Link to="/login" className="bg-primary text-white px-6 py-2.5 rounded-full font-semibold text-sm active:scale-95 transition-transform shadow-lg shadow-primary/20">
           Sign In
-        </button>
+        </Link>
       </div>
     </nav>
   );

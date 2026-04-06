@@ -12,14 +12,48 @@ export default function WardenDashboard() {
   const [location, setLocation] = useState('Hayatabad Phase 3');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [hostels, setHostels] = useState<any[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/login');
+      const hasVisited = localStorage.getItem('hasVisited');
+      if (!hasVisited) {
+        localStorage.setItem('hasVisited', 'true');
+        navigate('/signup');
+      } else {
+        navigate('/login');
+      }
     }
   }, [navigate]);
+
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      const res = await fetch('http://localhost:5000/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const meData = await res.json();
+      if (!meData.success) return;
+
+      const wardenId = meData.data._id;
+      const hostelRes = await fetch(`http://localhost:5000/api/hostels?warden=${wardenId}`);
+      const hostelData = await hostelRes.json();
+
+      if (hostelData.success) {
+        setHostels(hostelData.data);
+      }
+    } catch (err) {
+      console.error("Error fetching dashboard data:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +94,7 @@ export default function WardenDashboard() {
         setName('');
         setRooms('');
         setRent('');
+        fetchDashboardData();
       } else {
         setMessage(addData.error || 'Failed to add hostel');
       }
@@ -161,38 +196,42 @@ export default function WardenDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-surface-container">
-                    {[
-                      { name: "Khyber Executive", rooms: "12 Rooms Available", loc: "Phase 3, Hayatabad", status: "Active", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCBkXLIZvDlsnZvWfusma2jIgGjixgleKmrafUZDvaYOcTJT0SrJI9KnvOl44gDIauAq8No3UkE2ACJT1pNOTvXr3r77UaSfqyRiN_Y7mSRuItXjUAVRQAWY-TWWVgW7xJ9dypU11h5jqqIUyCP3EQKfDMVaxwc5oDFx4n7hNLfAw13u5vmQZwG978XYV1-ASzi_0blLpZHdrQMJUjumiy7bmyZvN8v4yGRqjAWdXB3LImcpxt_NvoeS7rOtokqakxyjzBrU55PyyA" },
-                      { name: "Townside Manor", rooms: "Fully Occupied", loc: "University Town", status: "Full", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDHJII7Xo4uGXfSa5QrFG9-JqZFYJAC1mR1xNWwZibxwtCku3yaEtVwf4HreapUJGcjJ46XyDb3f_iLPILfDd68pq9v0THRBzBhPZSCweSwmS-VRCe6UPlaLwqY5YTYqhWZJKS16Qm8YRGUyNWdl31qJDHUPI2RdGTU4lDmSS1vsxjAJ7ebV95zCdovGJFDYa3yJrBUeqPrJifUTiK18z-_Cg6Hxw53wcgbX2uX-O9hE7cY8gK_TheZHONSOz8CDe_yH-LOci7Sews" },
-                      { name: "The Bloom Suite", rooms: "2 Rooms Available", loc: "Gullberg Sector", status: "Active", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDRo_1_rVYG9FdWvv8vNdG9MduM_I8vVXbqC6QNlpiL9xcPJpLWOKXB6K9sFzQOM8N7yf7Fx7BBhLYjimDnJQQv5yTG33kxj4Fn1V-vCG2NEjNBJgmpZqkIidOC1pB1txdITf0AkzymR6VvDqVOlWX2_kmYI55jGND-vnX0DE9Z_Vn1_OsYohjBmFDSGq-qDZNrplGJ1QHjbvt686jpVNbCebbXC_ik8v3755RawfvYTlT5hA_lVvL0EtLaZ0BvkHJkC52cVdMdDZQ" }
-                    ].map((row, i) => (
-                      <tr key={i} className="hover:bg-surface-container-high/30 transition-colors group">
-                        <td className="px-8 py-6">
-                          <div className="flex items-center gap-3">
-                            <img src={row.img} className="w-12 h-12 rounded-lg object-cover" alt={row.name} referrerPolicy="no-referrer" />
-                            <div>
-                              <p className="text-sm font-bold text-on-surface">{row.name}</p>
-                              <p className="text-[10px] text-on-surface-variant">{row.rooms}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-4 py-6 text-xs font-medium text-on-surface-variant">{row.loc}</td>
-                        <td className="px-4 py-6">
-                          <div className="flex items-center gap-2">
-                            <div className={cn("w-10 h-5 rounded-full relative flex items-center px-1", row.status === 'Active' ? "bg-primary/20" : "bg-on-surface-variant/20")}>
-                              <div className={cn("w-3 h-3 rounded-full absolute", row.status === 'Active' ? "bg-primary right-1" : "bg-on-surface-variant left-1")}></div>
-                            </div>
-                            <span className={cn("text-[10px] font-bold uppercase", row.status === 'Active' ? "text-primary" : "text-on-surface-variant")}>{row.status}</span>
-                          </div>
-                        </td>
-                        <td className="px-8 py-6 text-right">
-                          <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button className="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all"><Edit className="w-4 h-4" /></button>
-                            <button className="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-error hover:bg-error hover:text-white transition-all"><Trash2 className="w-4 h-4" /></button>
-                          </div>
-                        </td>
+                    {hostels.length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="px-8 py-6 text-center text-on-surface-variant text-sm">No hostels found. Add one above!</td>
                       </tr>
-                    ))}
+                    )}
+                    {hostels.map((hostel, i) => {
+                      const status = "Active";
+                      return (
+                        <tr key={i} className="hover:bg-surface-container-high/30 transition-colors group">
+                          <td className="px-8 py-6">
+                            <div className="flex items-center gap-3">
+                              <img src={hostel.image} className="w-12 h-12 rounded-lg object-cover" alt={hostel.name} referrerPolicy="no-referrer" />
+                              <div>
+                                <p className="text-sm font-bold text-on-surface">{hostel.name}</p>
+                                <p className="text-[10px] text-on-surface-variant">{hostel.capacity} Rooms Available</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-6 text-xs font-medium text-on-surface-variant">{hostel.location}</td>
+                          <td className="px-4 py-6">
+                            <div className="flex items-center gap-2">
+                              <div className={cn("w-10 h-5 rounded-full relative flex items-center px-1", status === 'Active' ? "bg-primary/20" : "bg-on-surface-variant/20")}>
+                                <div className={cn("w-3 h-3 rounded-full absolute", status === 'Active' ? "bg-primary right-1" : "bg-on-surface-variant left-1")}></div>
+                              </div>
+                              <span className={cn("text-[10px] font-bold uppercase", status === 'Active' ? "text-primary" : "text-on-surface-variant")}>{status}</span>
+                            </div>
+                          </td>
+                          <td className="px-8 py-6 text-right">
+                            <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <button className="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all"><Edit className="w-4 h-4" /></button>
+                              <button className="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-error hover:bg-error hover:text-white transition-all"><Trash2 className="w-4 h-4" /></button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>
