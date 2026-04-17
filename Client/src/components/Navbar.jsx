@@ -37,10 +37,13 @@ export default function Navbar() {
           Map View
         </Link>
         <Link
-          to="/dashboard"
-          className="font-medium text-sm tracking-tight text-on-surface opacity-70 hover:opacity-100 transition-all duration-300"
+          to="/contact"
+          className={cn(
+            "font-medium text-sm tracking-tight transition-all duration-300 pb-1",
+            location.pathname === '/contact' ? "text-primary border-b-2 border-primary" : "text-on-surface opacity-70 hover:opacity-100"
+          )}
         >
-          Manage Listings
+          Contact Us
         </Link>
       </div>
 

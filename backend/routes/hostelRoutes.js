@@ -1,5 +1,5 @@
 const express = require('express');
-const { createHostel, getHostels, getHostelById } = require('../controllers/hostelController');
+const { createHostel, getHostels, getHostelById, updateHostel, deleteHostel } = require('../controllers/hostelController');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
@@ -11,6 +11,8 @@ router
 
 router
     .route('/:id')
-    .get(getHostelById);
+    .get(getHostelById)
+    .put(protect, updateHostel)
+    .delete(protect, deleteHostel);
 
 module.exports = router;

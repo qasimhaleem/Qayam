@@ -9,9 +9,30 @@ const hostelSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add a location'],
     },
+    city: {
+        type: String,
+        default: 'Peshawar'
+    },
+    area: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    description: {
+        type: String,
+    },
+    furnished: {
+        type: String,
+        default: 'Furnished'
+    },
+    coordinates: {
+        lat: { type: Number },
+        lng: { type: Number }
+    },
     capacity: {
         type: Number,
-        required: [true, 'Please add capacity'],
+        required: [true, 'Please add capacity (Total Beds)'],
     },
     wardenName: {
         type: String,

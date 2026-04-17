@@ -1,6 +1,6 @@
 import { Search, Filter, Plus, Minus, Navigation, Heart, Wifi, Wind, User, Utensils, Shield, WashingMachine, Zap, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
-import Navbar from '../components/Navbar.tsx';
+import Navbar from '../components/Navbar';
 import { cn } from '@/src/lib/utils';
 
 const hostels = [

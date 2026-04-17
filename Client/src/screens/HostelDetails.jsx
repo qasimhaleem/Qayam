@@ -136,9 +136,13 @@ export default function HostelDetails() {
                         </div>
 
                         <div className="pt-6">
-                            <button className="w-full bg-primary hover:bg-secondary text-white py-4 rounded-xl font-black uppercase tracking-widest transition-colors active:scale-95 editorial-shadow">
+                            <a 
+                                href={hostel.contactNumber ? `https://wa.me/${hostel.contactNumber.replace(/\D/g, '')}` : '#'}
+                                target="_blank" 
+                                rel="noreferrer"
+                                className="block text-center w-full bg-primary hover:bg-secondary text-white py-4 rounded-xl font-black uppercase tracking-widest transition-colors active:scale-95 editorial-shadow">
                                 Reserve Your Spot Now
-                            </button>
+                            </a>
                             <p className="text-center text-xs text-on-surface-variant font-medium mt-4">For immediate bookings, call the warden directly.</p>
                         </div>
                     </motion.div>

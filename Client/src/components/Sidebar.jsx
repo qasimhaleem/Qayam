@@ -5,9 +5,10 @@ import { LayoutDashboard, Building2, CalendarCheck, Wallet, Settings, HelpCircle
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
   { icon: Building2, label: 'Hostel Listings', href: '/management' },
-  { icon: CalendarCheck, label: 'Bookings', href: '#' },
-  { icon: Wallet, label: 'Revenue', href: '#' },
-  { icon: Settings, label: 'Settings', href: '#' },
+  { icon: HelpCircle, label: 'Warden Guidance', href: '/warden-guidance' },
+  { icon: CalendarCheck, label: 'Bookings', href: '/coming-soon' },
+  { icon: Wallet, label: 'Revenue', href: '/coming-soon' },
+  { icon: Settings, label: 'Settings', href: '/coming-soon' },
 ];
 
 export default function Sidebar() {
@@ -49,11 +50,11 @@ export default function Sidebar() {
       </div>
 
       <div className="mt-10 border-t border-primary/5 pt-6 space-y-1">
-        <Link to="#" className="flex items-center gap-4 px-8 py-3 text-secondary hover:bg-surface-container-high hover:translate-x-1 transition-all">
+        <Link to="/coming-soon" className="flex items-center gap-4 px-8 py-3 text-secondary hover:bg-surface-container-high hover:translate-x-1 transition-all">
           <Settings className="w-5 h-5" />
           <span className="text-sm font-medium">Settings</span>
         </Link>
-        <Link to="#" className="flex items-center gap-4 px-8 py-3 text-secondary hover:bg-surface-container-high hover:translate-x-1 transition-all">
+        <Link to="/contact" className="flex items-center gap-4 px-8 py-3 text-secondary hover:bg-surface-container-high hover:translate-x-1 transition-all">
           <HelpCircle className="w-5 h-5" />
           <span className="text-sm font-medium">Support</span>
         </Link>

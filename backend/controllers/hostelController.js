@@ -5,11 +5,18 @@ const Hostel = require('../models/Hostel');
 // @access  Public (or customize based on requirements)
 exports.createHostel = async (req, res) => {
     try {
-        const { name, location, capacity, wardenName, contactNumber, amenities, price, image } = req.body;
+        const { name, location, capacity, wardenName, contactNumber, amenities, price, image, city, area, address, description, furnished, coordinates, gender } = req.body;
 
         const hostel = await Hostel.create({
             name,
             location,
+            city,
+            area,
+            address,
+            description,
+            furnished,
+            coordinates,
+            gender,
             capacity,
             wardenName,
             contactNumber,
@@ -82,6 +89,81 @@ exports.getHostelById = async (req, res) => {
         res.status(200).json({
             success: true,
             data: hostel
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+// @desc    Update hostel
+// @route   PUT /api/hostels/:id
+// @access  Private
+exports.updateHostel = async (req, res) => {
+    try {
+        let hostel = await Hostel.findById(req.params.id);
+
+        if (!hostel) {
+            return res.status(404).json({
+                success: false,
+                error: 'Hostel not found'
+            });
+        }
+
+        // Make sure user is hostel owner
+        if (hostel.warden && hostel.warden.toString() !== req.warden.id) {
+            return res.status(401).json({
+                success: false,
+                error: 'Not authorized to update this hostel'
+            });
+        }
+
+        hostel = await Hostel.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({
+            success: true,
+            data: hostel
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+// @desc    Delete hostel
+// @route   DELETE /api/hostels/:id
+// @access  Private
+exports.deleteHostel = async (req, res) => {
+    try {
+        const hostel = await Hostel.findById(req.params.id);
+
+        if (!hostel) {
+            return res.status(404).json({
+                success: false,
+                error: 'Hostel not found'
+            });
+        }
+
+        // Make sure user is hostel owner
+        if (hostel.warden && hostel.warden.toString() !== req.warden.id) {
+            return res.status(401).json({
+                success: false,
+                error: 'Not authorized to delete this hostel'
+            });
+        }
+
+        await hostel.deleteOne();
+
+        res.status(200).json({
+            success: true,
+            data: {}
         });
     } catch (error) {
         res.status(400).json({

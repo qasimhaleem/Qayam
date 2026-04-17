@@ -27,9 +27,9 @@ export default function Footer() {
             <div className="space-y-4">
               <p className="font-bold text-xs uppercase tracking-widest text-primary-fixed">Company</p>
               <nav className="flex flex-col gap-3">
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Privacy Policy</a>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/privacy">Privacy Policy</Link>
                 <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Terms of Service</a>
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Contact Us</a>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/contact">Contact Us</Link>
               </nav>
             </div>
 
@@ -49,11 +49,11 @@ export default function Footer() {
 
         <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] tracking-wide uppercase text-surface/60">
-            © 2024 Qayam - Your Home in the City of Flowers.
+            © 2026 Qayam - Your Home in the City of Flowers.
           </p>
           <div className="flex gap-8">
             <a className="text-[10px] tracking-wide uppercase text-surface/60 hover:text-white underline transition-colors" href="#">Support</a>
-            <a className="text-[10px] tracking-wide uppercase text-surface/60 hover:text-white transition-colors" href="#">Contact Us</a>
+            <Link className="text-[10px] tracking-wide uppercase text-surface/60 hover:text-white transition-colors" to="/contact">Contact Us</Link>
           </div>
         </div>
       </div>
