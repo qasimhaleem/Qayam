@@ -5,7 +5,7 @@ const Hostel = require('../models/Hostel');
 // @access  Public (or customize based on requirements)
 exports.createHostel = async (req, res) => {
     try {
-        const { name, location, capacity, wardenName, contactNumber, amenities, price, image, city, area, address, description, furnished, coordinates, gender } = req.body;
+        const { name, location, capacity, wardenName, contactNumber, amenities, price, image, images, city, area, address, description, furnished, coordinates, gender } = req.body;
 
         const hostel = await Hostel.create({
             name,
@@ -23,6 +23,7 @@ exports.createHostel = async (req, res) => {
             amenities,
             price,
             image,
+            images,
             warden: req.warden.id
         });
 

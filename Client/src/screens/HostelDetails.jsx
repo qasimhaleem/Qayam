@@ -4,12 +4,14 @@ import { motion } from 'motion/react';
 import { MapPin, Phone, User, Users, CheckCircle2, ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { cn } from '../lib/utils';
 
 export default function HostelDetails() {
     const { id } = useParams();
     const [hostel, setHostel] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [activeImageIdx, setActiveImageIdx] = useState(0);
 
     useEffect(() => {
         const fetchHostel = async () => {
@@ -67,13 +69,33 @@ export default function HostelDetails() {
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="rounded-3xl overflow-hidden editorial-shadow h-[80vh] sticky top-28"
+                        className="flex flex-col gap-4 sticky top-28"
                     >
-                        <img
-                            src={hostel.image || 'https://via.placeholder.com/600x800'}
-                            alt={hostel.name}
-                            className="w-full h-full object-cover"
-                        />
+                        <div className="rounded-3xl overflow-hidden editorial-shadow h-[65vh] w-full bg-surface-container-low">
+                            <img
+                                src={(hostel.images && hostel.images.length > 0) ? hostel.images[activeImageIdx] : (hostel.image || 'https://via.placeholder.com/600x800')}
+                                alt={hostel.name}
+                                className="w-full h-full object-cover transition-opacity duration-500 rounded-3xl"
+                            />
+                        </div>
+                        
+                        {/* Thumbnail Strip */}
+                        {hostel.images && hostel.images.length > 1 && (
+                            <div className="flex gap-3 overflow-x-auto pb-2 snap-x hide-scrollbar flex-nowrap w-full">
+                                {hostel.images.map((img, idx) => (
+                                    <button 
+                                        key={idx}
+                                        onClick={() => setActiveImageIdx(idx)}
+                                        className={cn(
+                                            "flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-[3px] transition-all snap-start",
+                                            activeImageIdx === idx ? "border-primary shadow-lg shadow-primary/20 scale-100" : "border-transparent scale-[0.95] opacity-60 hover:opacity-100 hover:scale-100"
+                                        )}
+                                    >
+                                        <img src={img} alt={`Gallery view ${idx+1}`} className="w-full h-full object-cover" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </motion.div>
 
                     <motion.div

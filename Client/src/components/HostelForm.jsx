@@ -17,7 +17,7 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
   const [description, setDescription] = useState('');
   
   const [selectedAmenities, setSelectedAmenities] = useState([]);
-  const [imageBase64, setImageBase64] = useState('');
+  const [imagesBase64, setImagesBase64] = useState([]);
   
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
@@ -40,7 +40,15 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
       setLat(initialData.coordinates?.lat ? initialData.coordinates.lat.toString() : '');
       setLng(initialData.coordinates?.lng ? initialData.coordinates.lng.toString() : '');
       setSelectedAmenities(initialData.amenities || []);
-      setImageBase64(initialData.image && initialData.image.includes('placeholder') ? '' : (initialData.image || ''));
+      
+      const loadedImages = [];
+      if (initialData.image && !initialData.image.includes('placeholder')) loadedImages.push(initialData.image);
+      if (initialData.images && Array.isArray(initialData.images)) {
+        initialData.images.forEach(img => {
+          if (!loadedImages.includes(img) && !img.includes('placeholder')) loadedImages.push(img);
+        });
+      }
+      setImagesBase64(loadedImages);
     }
   }, [initialData]);
 
@@ -50,15 +58,43 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
     );
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageBase64(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+
+    if (imagesBase64.length + files.length > 8) {
+      alert("You can only upload a maximum of 8 images.");
+      return;
     }
+
+    const validFiles = files.filter(file => {
+      if (file.size > 2 * 1024 * 1024) {
+        alert(`${file.name} is larger than the 2MB limit and will be skipped.`);
+        return false;
+      }
+      return true;
+    });
+
+    try {
+      const base64Promises = validFiles.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      });
+
+      const newBase64Images = await Promise.all(base64Promises);
+      setImagesBase64(prev => [...prev, ...newBase64Images].slice(0, 8));
+    } catch (err) {
+      alert("Error processing images.");
+      console.error(err);
+    }
+  };
+
+  const removeImage = (index) => {
+    setImagesBase64(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e) => {
@@ -97,7 +133,8 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
         wardenName,
         amenities: selectedAmenities,
         coordinates,
-        image: imageBase64 || 'https://via.placeholder.com/400x300'
+        image: imagesBase64.length > 0 ? imagesBase64[0] : 'https://via.placeholder.com/400x300',
+        images: imagesBase64
       };
 
       const url = editingId 
@@ -244,24 +281,51 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
         </div>
 
         <div className="space-y-2">
-          <label className="block text-[10px] font-bold uppercase tracking-wider text-secondary">Hostel Image</label>
-          <label className="relative w-full aspect-video bg-surface-container overflow-hidden rounded-xl border-2 border-dashed border-on-surface-variant/20 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-surface-container-high transition-colors group">
+          <label className="block text-[10px] font-bold uppercase tracking-wider text-secondary">Hostel Images (Max 8, 2MB each)</label>
+          <label className={cn("relative w-full aspect-video bg-surface-container overflow-hidden rounded-xl border-2 border-dashed border-on-surface-variant/20 flex flex-col items-center justify-center gap-3 transition-colors group", imagesBase64.length >= 8 ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-surface-container-high")}>
             <input 
               type="file" 
               accept="image/*" 
+              multiple
               className="hidden" 
+              disabled={imagesBase64.length >= 8}
               onChange={handleImageUpload}
             />
-            {imageBase64 ? (
-              <img src={imageBase64} className="w-full h-full object-cover" alt="Preview" />
-            ) : (
+            {imagesBase64.length === 0 ? (
               <>
                 <CloudUpload className="w-10 h-10 text-primary/40 group-hover:text-primary transition-colors" />
-                <p className="text-xs font-medium text-on-surface-variant">Click to upload image</p>
-                <p className="text-[10px] text-on-surface-variant/50">JPG, PNG up to 5MB</p>
+                <p className="text-xs font-medium text-on-surface-variant">Click to upload up to 8 images</p>
+                <p className="text-[10px] text-on-surface-variant/50">JPG, PNG strictly up to 2MB per image</p>
               </>
+            ) : (
+              <div className="absolute inset-0 p-4">
+                <div className="flex flex-col items-center justify-center w-full h-full border border-dashed border-primary/30 rounded-lg bg-primary/5">
+                   <CloudUpload className="w-8 h-8 text-primary/60 mb-2" />
+                   <span className="text-xs font-bold text-primary">Upload More Images ({imagesBase64.length}/8)</span>
+                </div>
+              </div>
             )}
           </label>
+          
+          {imagesBase64.length > 0 && (
+            <div className="grid grid-cols-4 gap-3 mt-4">
+              {imagesBase64.map((img, idx) => (
+                <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-surface-container-high group">
+                  <img src={img} alt={`Preview ${idx+1}`} className="w-full h-full object-cover" />
+                  <button 
+                    type="button"
+                    onClick={() => removeImage(idx)}
+                    className="absolute top-1 right-1 bg-black/60 hover:bg-error text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-all"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                  {idx === 0 && (
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[8px] font-bold text-center py-1 uppercase tracking-widest">Primary</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         
         <button disabled={loading} className="w-full bg-tertiary text-white py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all mt-4 shadow-lg shadow-tertiary/20 flex justify-center items-center" type="submit">

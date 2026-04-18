@@ -51,7 +51,7 @@ export default function Footer() {
               <p className="font-bold text-xs uppercase tracking-widest text-primary-fixed">Company</p>
               <nav className="flex flex-col gap-3">
                 <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/privacy">Privacy Policy</Link>
-                <a className="text-sm text-surface/60 hover:text-white transition-colors" href="#">Terms of Service</a>
+                <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/terms">Terms of Service</Link>
                 <Link className="text-sm text-surface/60 hover:text-white transition-colors" to="/contact">Contact Us</Link>
               </nav>
             </div>

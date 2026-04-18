@@ -15,6 +15,7 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import WardenGuidance from './screens/WardenGuidance';
 import PrivacyPolicy from './screens/PrivacyPolicy';
+import TermsOfService from './screens/TermsOfService';
 import ContactUs from './screens/ContactUs';
 import ComingSoon from './screens/ComingSoon';
 
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/hostel/:id" element={<HostelDetails />} />
         <Route path="/warden-guidance" element={<WardenGuidance />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>

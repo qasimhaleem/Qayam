@@ -7,18 +7,45 @@ export default function ContactUs() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const subject = `Qayam Contact Form: Message from ${formData.name}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    window.location.href = `mailto:mrqasimhaleem@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: "247db73c-3d82-4e72-b23c-8854b61ee427", // <--- PLACE KEY HERE
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Qayam Contact Form: Message from ${formData.name}`
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', email: '', message: '' });
+        }, 3000);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message. Check your internet connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -32,7 +59,7 @@ export default function ContactUs() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          
+
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="bg-surface-container-low p-8 rounded-3xl editorial-shadow space-y-6">
@@ -47,14 +74,14 @@ export default function ContactUs() {
                     <p className="text-on-surface-variant text-sm mt-1">Qayam Headquarters, Main University Road, Peshawar, KPK 25000</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary flex-shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <h3 className="font-bold text-on-surface">Phone Support</h3>
-                    <p className="text-on-surface-variant text-sm mt-1">+92 300 1234567<br/>Mon-Fri from 9am to 6pm</p>
+                    <p className="text-on-surface-variant text-sm mt-1">+92 300 1234567<br />Mon-Fri from 9am to 6pm</p>
                   </div>
                 </div>
 
@@ -69,7 +96,7 @@ export default function ContactUs() {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-surface-container-highest p-8 rounded-3xl text-center">
               <h3 className="font-bold text-on-surface mb-2">Are you a Hostel Owner?</h3>
               <p className="text-sm text-on-surface-variant mb-4">You can list your hostel and gain visibility by navigating directly to our Wardens Dashboard.</p>
@@ -91,46 +118,46 @@ export default function ContactUs() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-secondary">Full Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    required 
+                  <input
+                    type="text"
+                    id="name"
+                    required
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" 
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50"
                     placeholder="e.g. John Doe"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-secondary">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    required 
+                  <input
+                    type="email"
+                    id="email"
+                    required
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50" 
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50"
                     placeholder="e.g. email@university.edu"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-secondary">Message</label>
-                  <textarea 
-                    id="message" 
-                    required 
+                  <textarea
+                    id="message"
+                    required
                     rows={5}
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50 resize-y" 
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-surface-container-low border-0 rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/50 resize-y"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
-                
-                <button type="submit" className="w-full bg-primary text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-secondary active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+
+                <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-secondary active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
                   <Send className="w-4 h-4" />
-                  Send Message
+                  {isSubmitting ? "Sending Route..." : "Send Message"}
                 </button>
               </form>
             )}

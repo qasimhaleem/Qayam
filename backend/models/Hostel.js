@@ -58,6 +58,10 @@ const hostelSchema = new mongoose.Schema({
         type: String,
         default: "https://via.placeholder.com/400x300",
     },
+    images: {
+        type: [String],
+        default: [],
+    },
     tag: {
         type: String,
         default: "",
