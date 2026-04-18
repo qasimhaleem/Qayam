@@ -57,7 +57,7 @@ exports.getHostels = async (req, res) => {
             query.warden = req.query.warden;
         }
 
-        const hostels = await Hostel.find(query);
+        const hostels = await Hostel.find(query).lean();
 
         res.status(200).json({
             success: true,
@@ -77,7 +77,7 @@ exports.getHostels = async (req, res) => {
 // @access  Public
 exports.getHostelById = async (req, res) => {
     try {
-        const hostel = await Hostel.findById(req.params.id);
+        const hostel = await Hostel.findById(req.params.id).lean();
 
         if (!hostel) {
             return res.status(404).json({

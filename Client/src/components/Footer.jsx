@@ -2,6 +2,29 @@ import { Share2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Qayam - Student Housing',
+      text: 'Check out Qayam, the best verified student housing platform in the City of Flowers!',
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    }
+  };
+
   return (
     <footer className="bg-[#0b1f18] text-surface w-full py-16 px-8">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -36,9 +59,9 @@ export default function Footer() {
             <div className="space-y-4 col-span-2 md:col-span-1">
               <p className="font-bold text-xs uppercase tracking-widest text-primary-fixed">Connect</p>
               <div className="flex gap-4">
-                <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+                <button onClick={handleShare} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors hover:cursor-pointer" aria-label="Share">
                   <Share2 className="w-4 h-4" />
-                </a>
+                </button>
                 <a className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="mailto:support@qayam.com">
                   <Mail className="w-4 h-4" />
                 </a>

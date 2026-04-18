@@ -230,75 +230,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
-        <section className="bg-surface py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 space-y-4">
-              <h2 className="text-4xl font-headline font-black text-on-surface">Why Choose Qayam?</h2>
-              <p className="text-on-surface-variant max-w-2xl mx-auto">Skip the hassle of brokers and untrustworthy listings. We provide a transparent environment engineered for student success.</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                  <ShieldCheck className="w-10 h-10" />
-                </div>
-                <h3 className="text-2xl font-black">Verified Wardens</h3>
-                <p className="text-on-surface-variant">We strictly vet property owners and managers before their hostels are listed dynamically to maximize structural safety.</p>
-              </div>
-              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6 border border-primary/20">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                  <HeartHandshake className="w-10 h-10" />
-                </div>
-                <h3 className="text-2xl font-black text-primary">0% Commission</h3>
-                <p className="text-on-surface-variant">Say goodbye to middlemen draining your budget. Students use this platform totally free, interacting directly with owners.</p>
-              </div>
-              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                  <UserCheck className="w-10 h-10" />
-                </div>
-                <h3 className="text-2xl font-black">Direct Access</h3>
-                <p className="text-on-surface-variant">Find a listing you like? The Warden's direct WhatsApp and cellular dial inputs are provided upfront for quick bookings.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* User Guidance / How It Works */}
-        <section className="bg-surface-container-highest py-24 px-8 border-y border-surface-container-high/50">
-          <div className="max-w-7xl mx-auto flex flex-col items-center">
-            <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3">Simple Process</span>
-            <h2 className="text-4xl font-headline font-black text-on-surface mb-16 text-center">How to Find Your Best Hostel</h2>
-            
-            <div className="flex flex-col md:flex-row gap-8 w-full relative">
-              <div className="hidden md:block absolute top-[40%] left-[10%] right-[10%] h-1 bg-surface-container-high z-0"></div>
-              
-              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
-                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-primary/20 mb-4">1</div>
-                <h3 className="text-xl font-bold">Search & Filter</h3>
-                <p className="text-on-surface-variant text-sm max-w-[200px]">Use our smart search or GPS to locate verified hostels matching your specific lifestyle needs.</p>
-              </div>
-              
-              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
-                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-primary/20 mb-4">2</div>
-                <h3 className="text-xl font-bold">Review & Verify</h3>
-                <p className="text-on-surface-variant text-sm max-w-[200px]">Check out amenities, distances, and ensure the property carries our premium verified badge.</p>
-              </div>
-              
-              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
-                <div className="w-16 h-16 bg-tertiary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-tertiary/20 mb-4">3</div>
-                <h3 className="text-xl font-bold">Contact Warden</h3>
-                <p className="text-on-surface-variant text-sm max-w-[200px]">Hit the WhatsApp or Call button right on the card and establish terms directly with the owner.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Dynamic Listings Component */}
+        {/* Dynamic Listings Component moved up */}
         <section className="bg-surface pt-20">
           <div className="max-w-7xl mx-auto px-8 mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
             <div className="space-y-2">
-              <h2 className="text-4xl font-headline font-black tracking-tight text-on-surface">Available Residences</h2>
+              <h2 className="text-4xl font-headline font-black tracking-tight text-on-surface">Featured Hostels</h2>
               <p className="text-on-surface-variant font-medium text-lg">Showing {dynamicHostels.length} verified properties based on your active search.</p>
             </div>
             <Link to="/map" className="flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold text-sm uppercase tracking-widest active:scale-95 transition-all editorial-shadow group">
@@ -387,6 +323,70 @@ export default function Home() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us Section */}
+        <section className="bg-surface py-24 px-8 border-t border-surface-container-high/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16 space-y-4">
+              <h2 className="text-4xl font-headline font-black text-on-surface">Why Choose Qayam?</h2>
+              <p className="text-on-surface-variant max-w-2xl mx-auto">Skip the hassle of brokers and untrustworthy listings. We provide a transparent environment engineered for student success.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
+                  <ShieldCheck className="w-10 h-10" />
+                </div>
+                <h3 className="text-2xl font-black">Verified Wardens</h3>
+                <p className="text-on-surface-variant">We strictly vet property owners and managers before their hostels are listed dynamically to maximize structural safety.</p>
+              </div>
+              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6 border border-primary/20">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
+                  <HeartHandshake className="w-10 h-10" />
+                </div>
+                <h3 className="text-2xl font-black text-primary">0% Commission</h3>
+                <p className="text-on-surface-variant">Say goodbye to middlemen draining your budget. Students use this platform totally free, interacting directly with owners.</p>
+              </div>
+              <div className="bg-surface-container-low p-10 rounded-[3rem] editorial-shadow text-center space-y-6">
+                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
+                  <UserCheck className="w-10 h-10" />
+                </div>
+                <h3 className="text-2xl font-black">Direct Access</h3>
+                <p className="text-on-surface-variant">Find a listing you like? The Warden's direct WhatsApp and cellular dial inputs are provided upfront for quick bookings.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* User Guidance / How It Works */}
+        <section className="bg-surface-container-highest py-24 px-8 border-y border-surface-container-high/50">
+          <div className="max-w-7xl mx-auto flex flex-col items-center">
+            <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3">Simple Process</span>
+            <h2 className="text-4xl font-headline font-black text-on-surface mb-16 text-center">How to Find Your Best Hostel</h2>
+            
+            <div className="flex flex-col md:flex-row gap-8 w-full relative">
+              <div className="hidden md:block absolute top-[40%] left-[10%] right-[10%] h-1 bg-surface-container-high z-0"></div>
+              
+              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
+                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-primary/20 mb-4">1</div>
+                <h3 className="text-xl font-bold">Search & Filter</h3>
+                <p className="text-on-surface-variant text-sm max-w-[200px]">Use our smart search or GPS to locate verified hostels matching your specific lifestyle needs.</p>
+              </div>
+              
+              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
+                <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-primary/20 mb-4">2</div>
+                <h3 className="text-xl font-bold">Review & Verify</h3>
+                <p className="text-on-surface-variant text-sm max-w-[200px]">Check out amenities, distances, and ensure the property carries our premium verified badge.</p>
+              </div>
+              
+              <div className="flex-1 flex flex-col items-center text-center space-y-4 z-10 relative">
+                <div className="w-16 h-16 bg-tertiary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-tertiary/20 mb-4">3</div>
+                <h3 className="text-xl font-bold">Contact Warden</h3>
+                <p className="text-on-surface-variant text-sm max-w-[200px]">Hit the WhatsApp or Call button right on the card and establish terms directly with the owner.</p>
+              </div>
             </div>
           </div>
         </section>

@@ -9,7 +9,11 @@ export default function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate form submission
+    
+    const subject = `Qayam Contact Form: Message from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    window.location.href = `mailto:mrqasimhaleem@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -60,7 +64,7 @@ export default function ContactUs() {
                   </div>
                   <div>
                     <h3 className="font-bold text-on-surface">Email Us</h3>
-                    <p className="text-on-surface-variant text-sm mt-1">support@qayam.com<br/>wardens@qayam.com</p>
+                    <p className="text-on-surface-variant text-sm mt-1">mrqasimhaleem@gmail.com</p>
                   </div>
                 </div>
               </div>

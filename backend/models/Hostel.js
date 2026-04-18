@@ -8,13 +8,16 @@ const hostelSchema = new mongoose.Schema({
     location: {
         type: String,
         required: [true, 'Please add a location'],
+        index: true
     },
     city: {
         type: String,
-        default: 'Peshawar'
+        default: 'Peshawar',
+        index: true
     },
     area: {
         type: String,
+        index: true
     },
     address: {
         type: String,
@@ -49,6 +52,7 @@ const hostelSchema = new mongoose.Schema({
     gender: {
         type: String,
         default: "All Genders",
+        index: true
     },
     image: {
         type: String,
@@ -65,7 +69,8 @@ const hostelSchema = new mongoose.Schema({
     warden: {
         type: mongoose.Schema.ObjectId,
         ref: 'Warden',
-        required: false
+        required: false,
+        index: true
     },
     createdAt: {
         type: Date,

@@ -54,7 +54,7 @@ exports.login = async (req, res, next) => {
 // @access  Private
 exports.getMe = async (req, res, next) => {
     try {
-        const warden = await Warden.findById(req.warden.id);
+        const warden = await Warden.findById(req.warden.id).lean();
         res.status(200).json({
             success: true,
             data: warden

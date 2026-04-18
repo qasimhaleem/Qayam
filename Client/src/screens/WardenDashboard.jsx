@@ -52,7 +52,7 @@ export default function WardenDashboard() {
   return (
     <div className="min-h-screen">
       <Sidebar />
-      <main className="lg:ml-72 min-h-screen p-8 lg:p-12">
+      <main className="lg:ml-72 min-h-screen pt-24 px-6 pb-8 lg:p-12">
         <header className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
           <div>
             <h2 className="text-4xl font-black text-primary tracking-tighter mb-2">Warden Dashboard</h2>

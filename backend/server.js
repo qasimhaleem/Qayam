@@ -3,11 +3,15 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const compression = require('compression');
 
 // Load env vars
 dotenv.config();
 
 const app = express();
+
+// Compress responses
+app.use(compression());
 
 // Body parser
 app.use(express.json({ limit: '10mb' }));
