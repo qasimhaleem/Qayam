@@ -104,7 +104,7 @@ export default function ContactUs() {
                       href="mailto:mrqasimhaleem@gmail.com"
                       className="inline-block text-primary font-bold text-sm mt-1 hover:underline transition-all"
                     >
-                      mrqasimhaleem@gmail.com
+                      book@qayam.site
                     </a>
                   </div>
                 </div>
@@ -121,7 +121,7 @@ export default function ContactUs() {
           {/* Contact Form */}
           <div className="bg-surface-container-lowest p-8 md:p-10 rounded-3xl editorial-shadow border border-surface-container-high/50">
             {submitted ? (
-              <div className="flex flex-col items-center justify-center h-full py-12 space-y-4 text-center">
+              <div className="flex flex-col items-center justify-center h-full py-12 sgipace-y-4 text-center">
                 <div className="w-16 h-16 bg-primary/20 text-primary rounded-full flex items-center justify-center">
                   <Send className="w-8 h-8" />
                 </div>
