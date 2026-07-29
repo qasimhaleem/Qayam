@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, KeyRound, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { apiUrl } from '../lib/api';
 
 export default function Signup() {
     const [name, setName] = useState('');
@@ -18,7 +19,7 @@ export default function Signup() {
         setLoading(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/auth/register', {
+            const res = await fetch(apiUrl('/auth/register'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })

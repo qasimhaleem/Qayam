@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Building2, CloudUpload, Check, X, MapPin } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { apiUrl } from '../lib/api';
 
 const AMENITIES_LIST = ['WiFi', 'AC', 'Geyser', 'Laundry', 'Parking', 'Kitchen', 'Mess', 'UPS/Generator', 'CCTV', 'Study Room'];
 
@@ -104,11 +105,11 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/auth/me', {
+      const res = await fetch(apiUrl('/auth/me'), {
         headers: { Authorization: `Bearer ${token}` }
       });
       const meData = await res.json();
-      if (!meData.success) throw new Error('Not authorized');
+      if (!meData.success || !meData.data) throw new Error('Not authorized');
 
       const wardenName = meData.data.name;
 
@@ -138,8 +139,8 @@ export default function HostelForm({ editingId, initialData, onSuccess, onCancel
       };
 
       const url = editingId 
-        ? `http://localhost:5000/api/hostels/${editingId}`
-        : 'http://localhost:5000/api/hostels';
+        ? apiUrl(`/hostels/${editingId}`)
+        : apiUrl('/hostels');
         
       const method = editingId ? 'PUT' : 'POST';
 

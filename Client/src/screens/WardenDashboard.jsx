@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import { cn } from '@/src/lib/utils';
+import { apiUrl } from '../lib/api';
 
 export default function WardenDashboard() {
   const [hostels, setHostels] = useState([]);
@@ -27,14 +28,14 @@ export default function WardenDashboard() {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const res = await fetch('http://localhost:5000/api/auth/me', {
+      const res = await fetch(apiUrl('/auth/me'), {
         headers: { Authorization: `Bearer ${token}` }
       });
       const meData = await res.json();
-      if (!meData.success) return;
+      if (!meData.success || !meData.data) return;
 
       const wardenId = meData.data._id;
-      const hostelRes = await fetch(`http://localhost:5000/api/hostels?warden=${wardenId}`);
+      const hostelRes = await fetch(apiUrl(`/hostels?warden=${wardenId}`));
       const hostelData = await hostelRes.json();
 
       if (hostelData.success) {

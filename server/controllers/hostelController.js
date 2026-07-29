@@ -45,14 +45,15 @@ exports.createHostel = async (req, res) => {
 exports.getHostels = async (req, res) => {
     try {
         let query = {};
+        const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
         if (req.query.location) {
-            // Support partial location matches (e.g. "Town" matches "University Town")
-            query.location = { $regex: req.query.location, $options: 'i' };
+            // Support partial location matches safely
+            query.location = { $regex: escapeRegex(req.query.location), $options: 'i' };
         }
         if (req.query.gender && req.query.gender !== "All Genders") {
-            // Case-insensitive exact gender match, e.g. "Male Only" maps to "Male" or handles it gracefully
-            // Actually frontend passes "Male Only", we might just map it or use regex
-            query.gender = { $regex: req.query.gender.replace(" Only", ""), $options: 'i' };
+            const cleanGender = escapeRegex(req.query.gender.replace(" Only", ""));
+            query.gender = { $regex: cleanGender, $options: 'i' };
         }
         if (req.query.warden) {
             query.warden = req.query.warden;

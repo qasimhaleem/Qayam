@@ -5,6 +5,7 @@ import { MapPin, Phone, User, Users, CheckCircle2, ArrowLeft } from 'lucide-reac
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { cn } from '../lib/utils';
+import { apiUrl } from '../lib/api';
 
 export default function HostelDetails() {
     const { id } = useParams();
@@ -17,7 +18,7 @@ export default function HostelDetails() {
         const fetchHostel = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:5000/api/hostels/${id}`);
+                const res = await fetch(apiUrl(`/hostels/${id}`));
                 const data = await res.json();
 
                 if (data.success) {

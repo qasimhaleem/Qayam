@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { cn } from '@/src/lib/utils';
+import { apiUrl } from '../lib/api';
 
 // Helper to calculate distance in km using Haversine formula
 const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -62,7 +63,7 @@ export default function Home() {
   const fetchHostels = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/hostels`);
+      const res = await fetch(apiUrl('/hostels'));
       const data = await res.json();
       if (data.success) {
         setAllHostels(data.data);
