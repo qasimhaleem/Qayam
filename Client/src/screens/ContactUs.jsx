@@ -80,8 +80,17 @@ export default function ContactUs() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-on-surface">Phone Support</h3>
-                    <p className="text-on-surface-variant text-sm mt-1">+92 300 1234567<br />Mon-Fri from 9am to 6pm</p>
+                    <h3 className="font-bold text-on-surface">Phone & WhatsApp Support</h3>
+                    <a
+                      href="https://wa.me/923038843954"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-2 px-4 py-2.5 bg-[#25D366] hover:bg-[#1faa53] text-white text-xs font-bold rounded-full transition-all active:scale-95 shadow-md"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      Chat on WhatsApp (+92 303 8843954)
+                    </a>
+                    <p className="text-on-surface-variant text-xs mt-2 opacity-80">Mon-Fri from 9am to 6pm</p>
                   </div>
                 </div>
 
@@ -91,7 +100,12 @@ export default function ContactUs() {
                   </div>
                   <div>
                     <h3 className="font-bold text-on-surface">Email Us</h3>
-                    <p className="text-on-surface-variant text-sm mt-1">mrqasimhaleem@gmail.com</p>
+                    <a
+                      href="mailto:mrqasimhaleem@gmail.com"
+                      className="inline-block text-primary font-bold text-sm mt-1 hover:underline transition-all"
+                    >
+                      mrqasimhaleem@gmail.com
+                    </a>
                   </div>
                 </div>
               </div>
