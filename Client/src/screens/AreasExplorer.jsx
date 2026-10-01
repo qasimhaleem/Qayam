@@ -3,39 +3,49 @@ import { Search, Filter, Bed, ArrowRight, ShieldCheck, Map as MapIcon, Quote } f
 import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { cn } from '@/src/lib/utils';
 
 const areas = [
   {
-    name: "University Town",
-    hub: "Academic Hub",
-    count: 42,
-    description: "Peshawar’s premiere educational district, offering a vibrant lifestyle for students and professionals alike.",
+    name: "University Road",
+    hub: "Top Academic Zone",
+    count: 54,
+    description: "Located right next to Peshawar University, Islamia College, and UET. Premier location for boys and girls hostels.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAIZVFa8J3b43ZfaQiU4FYe2acSCcG4uMmiuzvKTGUEVej_5UxrriS0MdrHFaIrh-mN_QcmUjuzFnae3Zxfv2dIjrxOy42D4zg0gfKfD3i-gO9BtUt8sD_OSboqF9KZ-RUcsXbNGg5gudW9FemvFvHKAKv7x58mSM6Bp38XlA6197-NDckYfdL3GxDGX9q3xc7nZcGw-MbCSz-hUZNJyPTUadyCm9e5dwiRKvVYDLa1XEnB9kHa5TlP1Y6NriCXchZNkcoRih9IwSU",
     large: true
   },
   {
+    name: "Abdara Road",
+    hub: "Student Hub",
+    count: 38,
+    description: "Extremely popular area for boys and girls student accommodation with easy access to transport and food street.",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBZzLlFW4V8uV5ZIkqmbnoFUqtH_ESMdPXj5CAAf362IHlFL76waKGcC-taQvYjhx5SKAR9WAAyh-wmdZknkjj9anHu4SY537-yJep3pbc2JH4PvHA9KuASjCQCuqOsqWVHItc5T6a5XGC9K1UntodUDlYUSt40nptiDIwBEtz3MQa6k0rCRXKmQY_giPt6GYVqjU6b4eAWOG-fo8f07xVvmY8U8q-pD9OkxqNR7mMYhBGpgqC1B82sspXPfRDTBIdv0sZ3KndhL-s"
+  },
+  {
+    name: "University Town",
+    hub: "Peaceful & Secure",
+    count: 42,
+    description: "Peshawar’s premiere educational and peaceful residential district for students and working professionals.",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAIZVFa8J3b43ZfaQiU4FYe2acSCcG4uMmiuzvKTGUEVej_5UxrriS0MdrHFaIrh-mN_QcmUjuzFnae3Zxfv2dIjrxOy42D4zg0gfKfD3i-gO9BtUt8sD_OSboqF9KZ-RUcsXbNGg5gudW9FemvFvHKAKv7x58mSM6Bp38XlA6197-NDckYfdL3GxDGX9q3xc7nZcGw-MbCSz-hUZNJyPTUadyCm9e5dwiRKvVYDLa1XEnB9kHa5TlP1Y6NriCXchZNkcoRih9IwSU"
+  },
+  {
     name: "Hayatabad",
+    hub: "KMU & Medical Hub",
     count: 28,
-    description: "A planned, serene residential sanctuary with wide roads and modern parks.",
+    description: "Planned residential sanctuary near KMU, Phase 3 & Phase 5 with modern parks and high security hostels.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD_r3pXjH-jZsM2tld9C37Kgu8tXtVLW6pNQ6xtCOKmEGRG_3fVnC4NTBDDxGZsV9IYHrPEp-D200q42ZD4ezuKN87UgOmP8y_syJGRZhIShbCrmdEQcyRjiqN8ifIq3itVpL2UgG3vYAv58BhGu_IFzRwi64-GXJPx65NUWCss2Zw8GUsfxXCJNp3GYF1IgOcNdGjw7TysnE96i3E1rpP9hBzD7FyW4dSSq_qhitqEh77A27LLDaDYaHy7LlFrEX5OyQ-7HEiK0xs"
   },
   {
     name: "Board Bazaar",
     count: 15,
-    description: "Energetic and central, perfect for those who love being in the heart of the action.",
+    description: "Energetic and central student bazaar near Agriculture University with affordable mess hostels.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBZzLlFW4V8uV5ZIkqmbnoFUqtH_ESMdPXj5CAAf362IHlFL76waKGcC-taQvYjhx5SKAR9WAAyh-wmdZknkjj9anHu4SY537-yJep3pbc2JH4PvHA9KuASjCQCuqOsqWVHItc5T6a5XGC9K1UntodUDlYUSt40nptiDIwBEtz3MQa6k0rCRXKmQY_giPt6GYVqjU6b4eAWOG-fo8f07xVvmY8U8q-pD9OkxqNR7mMYhBGpgqC1B82sspXPfRDTBIdv0sZ3KndhL-s"
-  },
-  {
-    name: "Tehkal",
-    count: 12,
-    description: "Historic charm meets modern living in one of Peshawar's oldest neighborhoods.",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuA_4q9qke2Fb0r-Vw4WhgqKOZxQaE9l61K43rkjYX9FTJxTs7F_13HNIkCJy5p9RwMLpOURIQ70Y5_0Y_Z0OcoCw2hfSycsRYXJNT637OpYgd_cl9SxsqfUxB5J_xA_FpSap6YqIKl8S52EYy4Xzeec1Yw3P7TogyjodjTDR3D0YKqTw4dSRw2gaDfbf-rDaf2HlnQ65nGJffJN7uhnhKLIV7pFszgm8LUBtgXv2jg-zJknZP0BuZ7p325Gnv7TGa2IRoqdC6dGD-Y"
   },
   {
     name: "Saddar",
     count: 31,
-    description: "The commercial heartbeat of the city, where everything is just a walk away.",
+    description: "The commercial heartbeat of Peshawar, ideal for working men and women seeking central city hostels.",
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCg5RTOcZl3a6XZhhjtcihznIGgceh5Dardbqip4S87ovuONrgluKPxKGZbP8zWSUsecig5tO8Nu5Sspc6jOeZBkHBXSugDloIbHpY1NGUUIMBeqffdL7WhZOcfctdPJVb_gjmeSEHJ790ZMR6ZtkqEPRwHEvoPuh6qlmfcMsks6B6j0TJEDQrYzhWIPSFBszTXyxE4rbRiQswPStNDzqFJoTaLKo8NsRmNqSXbppqvhYtcwlgH52jkOPV75DdAJbZ52RWReH9hp08"
   }
 ];
@@ -43,6 +53,12 @@ const areas = [
 export default function AreasExplorer() {
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Hostel Areas in Peshawar & KPK | University Road, Abdara Road, Town & Hayatabad"
+        description="Explore top hostel locations in Peshawar: University Road, Abdara Road, Town, Hayatabad, Board Bazaar, Saddar, Mardan & Abbottabad. Verified boys & girls hostels."
+        keywords="hostel in university road peshawar, hostel in abdara road peshawar, hostel in town peshawar, hostel in hayatabad peshawar, hostel in board bazaar peshawar, hostel in saddar peshawar, hostels in peshawar"
+        canonical="https://qayam.site/areas"
+      />
       <Navbar />
 
       <main className="pt-32 pb-20 px-8 max-w-screen-2xl mx-auto">

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Page -->
   <url>
-    <loc>https://qayam.site.com/</loc>
+    <loc>https://qayam.site/</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,19 +10,19 @@
 
   <!-- Key Feature Pages -->
   <url>
-    <loc>https://qayam.site.com/areas</loc>
+    <loc>https://qayam.site/areas</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://qayam.site.com/map</loc>
+    <loc>https://qayam.site/map</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://qayam.site.com/warden-guidance</loc>
+    <loc>https://qayam.site/warden-guidance</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -30,19 +30,19 @@
 
   <!-- Auth & Info Pages -->
   <url>
-    <loc>https://qayam.site.com/contact</loc>
+    <loc>https://qayam.site/contact</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://qayam.site.com/login</loc>
+    <loc>https://qayam.site/login</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://qayam.site.com/signup</loc>
+    <loc>https://qayam.site/signup</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -50,13 +50,13 @@
 
   <!-- Policy Pages -->
   <url>
-    <loc>https://qayam.site.com/privacy</loc>
+    <loc>https://qayam.site/privacy</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://qayam.site.com/terms</loc>
+    <loc>https://qayam.site/terms</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

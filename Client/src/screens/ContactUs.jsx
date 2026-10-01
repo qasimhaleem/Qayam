@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export default function ContactUs() {
@@ -50,6 +51,12 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
+      <SEO 
+        title="Contact Qayam | Peshawar & KPK Hostel Support"
+        description="Get in touch with Qayam support or list your hostel in Peshawar, University Road, Abdara Road, Town, Hayatabad, Mardan & Abbottabad."
+        keywords="contact qayam hostel, list hostel peshawar, hostel warden contact peshawar, hostels in peshawar support"
+        canonical="https://qayam.site/contact"
+      />
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-8 max-w-7xl mx-auto w-full">

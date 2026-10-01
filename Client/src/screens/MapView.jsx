@@ -1,6 +1,7 @@
 import { Search, Filter, Plus, Minus, Navigation, Heart, Wifi, Wind, User, Utensils, Shield, WashingMachine, Zap, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 import { cn } from '@/src/lib/utils';
 
 const hostels = [
@@ -47,6 +48,12 @@ const hostels = [
 export default function MapView() {
   return (
     <div className="h-screen flex flex-col overflow-hidden">
+      <SEO 
+        title="Interactive Hostel Map Peshawar | University Road, Abdara Road, Town & Hayatabad"
+        description="Interactive map of hostels in Peshawar and KPK. Find verified boys and girls hostels near University of Peshawar, UET, KMU, Islamia College, Abdara Road & Town."
+        keywords="map hostel peshawar, hostels near university road peshawar map, abdara road hostel map, hayatabad hostel map"
+        canonical="https://qayam.site/map"
+      />
       <Navbar />
       <main className="pt-20 flex-1 flex overflow-hidden">
         <section className="relative flex-1 hidden lg:block bg-surface-container-low overflow-hidden">

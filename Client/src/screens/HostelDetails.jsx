@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { MapPin, Phone, User, Users, CheckCircle2, ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { cn } from '../lib/utils';
 import { apiUrl } from '../lib/api';
 
@@ -57,6 +58,12 @@ export default function HostelDetails() {
 
     return (
         <div className="min-h-screen bg-surface">
+            <SEO 
+                title={`${hostel.name} - ${hostel.gender} Hostel in ${hostel.area}, ${hostel.city} | Qayam`}
+                description={`View details for ${hostel.name} located in ${hostel.area}, ${hostel.city}. ${hostel.gender} student & working hostel with verified warden, ${hostel.amenities?.join(', ')}. Contact directly.`}
+                keywords={`${hostel.name}, hostel in ${hostel.area} ${hostel.city}, ${hostel.gender.toLowerCase()} hostel in ${hostel.area}, hostels in ${hostel.city}`}
+                canonical={`https://qayam.site/hostel/${hostel._id}`}
+            />
             <Navbar />
 
             <main className="pt-24 pb-16 px-6 max-w-6xl mx-auto space-y-10">

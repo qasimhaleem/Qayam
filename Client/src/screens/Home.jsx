@@ -4,6 +4,7 @@ import { Search, Map as MapIcon, Wifi, BadgeCheck, Navigation, Phone, MessageCir
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 import { cn } from '@/src/lib/utils';
 import { apiUrl } from '../lib/api';
 
@@ -128,6 +129,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Qayam | Best Hostels in Peshawar, KPK - Boys & Girls Hostel Finder"
+        description="Find verified boys and girls hostels in Peshawar, KPK. Search student & working hostels on University Road, Abdara Road, Town, Hayatabad, Saddar, Board Bazaar, Mardan & Abbottabad. Zero commission."
+        keywords="hostel in peshawar, boys hostel in peshawar, girls hostel in peshawar, hostel in university road peshawar, hostel in abdara road peshawar, hostel in town peshawar, hostel in hayatabad peshawar, hostel in board bazaar peshawar, hostel in saddar peshawar, hostels in kpk, hostels in mardan, hostels in abbottabad, uet peshawar hostel, islamia college hostel"
+        canonical="https://qayam.site/"
+      />
       <Navbar />
 
       <main className="pt-20">
@@ -137,7 +144,7 @@ export default function Home() {
             <img
               className="w-full h-full object-cover brightness-[0.70]"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-AEASaioC0PzjjJlh7quNiFxXQ0LybBu61pWG3ggK6GOEIl_mR--IbynLMU8DaoabmChIWJG_FHVNw1hQl90H1y-ok0T9bCUiDV4W1nCXObgWcyrhGiySoTXmWTAZayBv5Po_RLIMwbf5wapTFUdTbLwlAU_kbqra95_V3JLJhr0bULwXxgW5L1pWmpSaw8AgYm0O9VaGdWx6Z5inrNwoNE-zh-p7Y3_run5bLg_G8vcRG65oQpxQfNhXuR_t2o8CMYVmfwRwkcA"
-              alt="Hero background"
+              alt="Verified Hostels in Peshawar and KPK"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
@@ -152,13 +159,13 @@ export default function Home() {
             >
               <span className="inline-flex items-center gap-2 px-5 py-2 bg-primary text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-xl shadow-primary/20">
                 <BadgeCheck className="w-4 h-4 text-white" />
-                Verified Student Housing
+                #1 Verified Hostel Finder in KPK & Peshawar
               </span>
-              <h1 className="text-5xl md:text-7xl font-headline font-black tracking-tighter text-white drop-shadow-lg">
-                Find Sanctuary in the <span className="text-primary italic">City of Flowers</span>
+              <h1 className="text-4xl md:text-6xl font-headline font-black tracking-tighter text-white drop-shadow-lg">
+                Best Boys & Girls <span className="text-primary italic">Hostels in Peshawar</span> & KPK
               </h1>
               <p className="text-white/90 max-w-2xl mx-auto text-lg leading-relaxed font-medium drop-shadow-md">
-                Find zero-commission, fully vetted boys and girls hostels near your university. Experience safety and comfort seamlessly with direct communication.
+                Discover 0% commission student & working accommodation in University Road, Abdara Road, Town, Hayatabad, Board Bazaar & Saddar Peshawar. Direct warden contact.
               </p>
             </motion.div>
 
@@ -387,6 +394,101 @@ export default function Home() {
                 <div className="w-16 h-16 bg-tertiary text-white rounded-full flex items-center justify-center font-black text-2xl shadow-xl shadow-tertiary/20 mb-4">3</div>
                 <h3 className="text-xl font-bold">Contact Warden</h3>
                 <p className="text-on-surface-variant text-sm max-w-[200px]">Hit the WhatsApp or Call button right on the card and establish terms directly with the owner.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* KPK & Peshawar SEO Location & Keyword Directory */}
+        <section className="bg-surface-container-low py-20 px-8 border-t border-surface-container-high">
+          <div className="max-w-7xl mx-auto space-y-12">
+            <div className="text-center space-y-3">
+              <span className="text-primary font-bold tracking-widest uppercase text-xs">Top Rated Student & Working Accommodation in KPK</span>
+              <h2 className="text-3xl md:text-4xl font-headline font-black text-on-surface">
+                Find Hostels in Peshawar & Across Khyber Pakhtunkhwa (KPK)
+              </h2>
+              <p className="text-on-surface-variant max-w-3xl mx-auto text-base">
+                Qayam connects students and working professionals directly with top-rated, fully verified boys and girls hostels near premier universities and commercial hubs in Peshawar and throughout KPK.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* University Road & Abdara Road */}
+              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high space-y-3">
+                <h3 className="font-black text-xl text-primary flex items-center gap-2">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  University Road & Abdara Road
+                </h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  The primary hub for UET Peshawar, Islamia College, and Peshawar University students. Search verified <strong>boys hostels on Abdara Road</strong> and secure <strong>girls hostels on University Road</strong> with AC, Wi-Fi, and mess facilities.
+                </p>
+              </div>
+
+              {/* University Town & Board Bazaar */}
+              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high space-y-3">
+                <h3 className="font-black text-xl text-primary flex items-center gap-2">
+                  <Building className="w-5 h-5 text-primary" />
+                  Town & Board Bazaar
+                </h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  Ideal for Agriculture University and Forest Institute students. Browse budget-friendly <strong>boys hostels in Board Bazaar</strong> and premium <strong>female hostels in University Town Peshawar</strong>.
+                </p>
+              </div>
+
+              {/* Hayatabad & Saddar */}
+              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high space-y-3">
+                <h3 className="font-black text-xl text-primary flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-primary" />
+                  Hayatabad & Saddar
+                </h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  Close to Khyber Medical University (KMU) and commercial centers. Explore <strong>working men hostels in Saddar</strong> and secure <strong>girls hostels in Hayatabad Phase 3 & 5</strong> with 24/7 security.
+                </p>
+              </div>
+
+              {/* KPK Regional Hubs */}
+              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-surface-container-high space-y-3">
+                <h3 className="font-black text-xl text-primary flex items-center gap-2">
+                  <Navigation className="w-5 h-5 text-primary" />
+                  KPK Regional Hubs
+                </h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">
+                  Looking for accommodation outside Peshawar? Find verified <strong>boys and girls hostels in Mardan</strong> (near Abdul Wali Khan University), <strong>Abbottabad</strong> (near COMSATS & AMC), <strong>Swat</strong>, and <strong>Kohat</strong>.
+                </p>
+              </div>
+            </div>
+
+            {/* Fast Keyword Navigation Badges / Chips */}
+            <div className="pt-6 border-t border-surface-container-high text-center space-y-4">
+              <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">Popular Search Locations & Hostels in KPK:</span>
+              <div className="flex flex-wrap justify-center gap-2">
+                {[
+                  "Hostel in Peshawar",
+                  "Boys Hostel in Peshawar",
+                  "Girls Hostel in Peshawar",
+                  "Hostel in University Road Peshawar",
+                  "Hostel in Abdara Road Peshawar",
+                  "Hostel in Town Peshawar",
+                  "Hostel in Board Bazaar Peshawar",
+                  "Hostel in Hayatabad Peshawar",
+                  "Hostel in Saddar Peshawar",
+                  "UET Peshawar Boys Hostel",
+                  "Peshawar University Girls Hostel",
+                  "KMU Hayatabad Girls Hostel",
+                  "Hostels in Mardan",
+                  "Hostels in Abbottabad",
+                  "Working Men Hostel Peshawar",
+                  "Working Women Hostel Peshawar",
+                  "Cheap Hostels in Peshawar"
+                ].map((kw, idx) => (
+                  <Link
+                    key={idx}
+                    to={`/areas?search=${encodeURIComponent(kw)}`}
+                    className="px-3 py-1.5 bg-surface-container rounded-full text-xs font-semibold text-on-surface-variant hover:bg-primary hover:text-white transition-colors border border-surface-container-high"
+                  >
+                    #{kw}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
