@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow private/user dashboard routes from indexing
+Disallow: /dashboard
+Disallow: /management
+
+# Sitemap location
+Sitemap: https://qayam.site/sitemap.xml
